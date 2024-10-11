@@ -37,6 +37,6 @@ jobs:
         script: |
           docker login -u nologin -p ${{ secrets.API_KEY }} ${{ secrets.REGISTRY_ENDPOINT }}
           docker pull ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:latest
-          #docker stop portfolio || true
-          #docker rm portfolio || true
+          docker stop portfolio || true
+          docker rm portfolio || true
           docker run -d --name portfolio --network host ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:latest
