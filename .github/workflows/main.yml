@@ -22,10 +22,10 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:${{ github.sha }} .
-        docker tag ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:${{ github.sha }} ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:latest
-        docker push ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:${{ github.sha }}
-        docker push ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:latest
+        docker build -t ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:${{ github.sha }} .
+        docker tag ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:${{ github.sha }} ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:latest
+        docker push ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:latest
 
     - name: Deploy to VPS
       uses: appleboy/ssh-action@master
@@ -36,7 +36,7 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           docker login -u nologin -p ${{ secrets.API_KEY }} ${{ secrets.REGISTRY_ENDPOINT }}
-          docker pull ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:latest
-          #docker stop personal-website || true
-          #docker rm personal-website || true
-          docker run -d --name personal-website --network host ${{ secrets.REGISTRY_ENDPOINT }}/personal-website:latest
+          docker pull ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:latest
+          #docker stop portfolio || true
+          #docker rm portfolio || true
+          docker run -d --name portfolio --network host ${{ secrets.REGISTRY_ENDPOINT }}/portfolio:latest
