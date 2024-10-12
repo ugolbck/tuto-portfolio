@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8002"]
-CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8002"] # Uncomment before setting up Nginx as reverse proxy
+CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8002"] # Uncomment when setting up Nginx as reverse proxy
